@@ -66,7 +66,19 @@ Settings → MCP → Add Server:
 - Transport: `streamable-http`
 - URL: `https://mcp-u4hgvsy6cq-uc.a.run.app/mcp`
 
-### ChatGPT / Gemini / Other AI (Direct API)
+### ChatGPT / Gemini / Other AI
+
+#### Step 1 — Register via URL
+
+Ask your AI to open this URL (or open it yourself in a browser):
+
+```
+https://mcp-u4hgvsy6cq-uc.a.run.app/register?email=you@example.com&name=YourName
+```
+
+You'll receive your API token in the response and via email.
+
+#### Step 2 — Use the Direct API (JSON-RPC)
 
 Any AI client can call the JSON-RPC endpoint directly:
 
