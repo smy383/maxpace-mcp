@@ -66,8 +66,9 @@ For AI clients that don't support MCP (ChatGPT, Gemini, etc.) or custom integrat
 #### Request Format
 
 ```bash
-curl -X POST https://mcp-u4hgvsy6cq-uc.a.run.app \
+curl -X POST https://mcp-u4hgvsy6cq-uc.a.run.app/mcp \
   -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
   -d '{
     "jsonrpc": "2.0",
     "method": "tools/call",
@@ -103,8 +104,9 @@ curl -X POST https://mcp-u4hgvsy6cq-uc.a.run.app \
 #### List All Available Tools
 
 ```bash
-curl -X POST https://mcp-u4hgvsy6cq-uc.a.run.app \
+curl -X POST https://mcp-u4hgvsy6cq-uc.a.run.app/mcp \
   -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
   -d '{"jsonrpc":"2.0","method":"tools/list","id":1}'
 ```
 
@@ -112,7 +114,7 @@ curl -X POST https://mcp-u4hgvsy6cq-uc.a.run.app \
 
 Register the endpoint as a custom function/tool in your AI client:
 1. Define each tool as a function with its parameters
-2. Set the endpoint to `https://mcp-u4hgvsy6cq-uc.a.run.app`
+2. Set the endpoint to `https://mcp-u4hgvsy6cq-uc.a.run.app/mcp`
 3. Use JSON-RPC `tools/call` format for all requests
 4. Pass the user's API token in the `arguments.token` field
 
