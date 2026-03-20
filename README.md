@@ -84,17 +84,9 @@ Open this URL in your browser (replace with your real email and name):
 https://mcp-u4hgvsy6cq-uc.a.run.app/register?email=you@example.com&name=YourName
 ```
 
-You'll get a response like this:
+You'll see a success message, and your token will be **sent to your email**. Check your inbox.
 
-```json
-{
-  "success": true,
-  "token": "abc123:xyz456",
-  "message": "Welcome to Maxpace! Your token has been sent to you@example.com."
-}
-```
-
-**Save your token.** It's also sent to your email as backup.
+**Save your token.** It's only delivered once via email — keep it safe.
 
 ### Step 2 — Share your token with your AI
 
