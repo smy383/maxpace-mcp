@@ -120,7 +120,7 @@ Register the endpoint as a custom function/tool in your AI client:
 
 ---
 
-## Available Tools (45)
+## Available Tools (44)
 
 ### Authentication
 
