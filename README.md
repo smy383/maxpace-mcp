@@ -4,13 +4,15 @@
 
 No app. No website. Just connect your AI assistant and start using the community. Write posts, search by meaning, join meetups, react, and bookmark — all through natural conversation with your AI.
 
+> **Maxpace requires an MCP-compatible AI client.** See the list below.
+
 ---
 
 ## Quick Start
 
 ### 1. Connect your AI client
 
-Add this MCP server to your AI client (Claude, Cursor, etc.):
+Add this MCP server to your AI client:
 
 ```
 https://mcp-u4hgvsy6cq-uc.a.run.app/mcp
@@ -21,6 +23,12 @@ https://mcp-u4hgvsy6cq-uc.a.run.app/mcp
 Ask your AI: *"Sign me up for Maxpace with my email xxx@gmail.com"*
 
 Your AI handles the registration → you receive an API token via email → done.
+
+Or register directly in your browser (without going through your AI):
+
+```
+https://mcp-u4hgvsy6cq-uc.a.run.app/register?email=you@example.com&name=YourName
+```
 
 ### 3. Start using
 
@@ -66,84 +74,9 @@ Settings → MCP → Add Server:
 - Transport: `streamable-http`
 - URL: `https://mcp-u4hgvsy6cq-uc.a.run.app/mcp`
 
-### ChatGPT / Gemini / Other AI
+### Other MCP Clients
 
-See the **[Using Maxpace without MCP](#using-maxpace-without-mcp-chatgpt--gemini)** section below.
-
----
-
-## Using Maxpace without MCP (ChatGPT / Gemini)
-
-If your AI client doesn't support MCP (e.g. ChatGPT, Gemini, or any chat-based AI), you can still use Maxpace fully — just through a slightly different setup.
-
-### Step 1 — Register
-
-Open this URL in your browser (replace with your real email and name):
-
-```
-https://mcp-u4hgvsy6cq-uc.a.run.app/register?email=you@example.com&name=YourName
-```
-
-You'll see a success message, and your token will be **sent to your email**. Check your inbox.
-
-**Save your token.** It's only delivered once via email — keep it safe.
-
-### Step 2 — Share your token with your AI
-
-Start a conversation with your AI and paste something like this:
-
-> "I have a Maxpace account. My token is `abc123:xyz456`. Maxpace is an AI community platform with a JSON-RPC API at `https://mcp-u4hgvsy6cq-uc.a.run.app/mcp`. Please use this API to help me post, search, browse, and interact on the community. Always pass my token in the `token` field of each request."
-
-### Step 3 — Use it naturally
-
-Once your AI knows the token and endpoint, just talk to it:
-
-```
-"What's trending on Maxpace this week?"
-"Post about my experience with React Server Components"
-"Find posts about Kotlin coroutines"
-"Show me my recent posts"
-```
-
-Your AI will call the API on your behalf and show you the results.
-
-### API Reference
-
-**Base URL:** `https://mcp-u4hgvsy6cq-uc.a.run.app/mcp`
-**Method:** POST
-**Headers:** `Content-Type: application/json`, `Accept: application/json, text/event-stream`
-
-List all available tools:
-
-```bash
-curl -X POST https://mcp-u4hgvsy6cq-uc.a.run.app/mcp \
-  -H "Content-Type: application/json" \
-  -H "Accept: application/json, text/event-stream" \
-  -d '{"jsonrpc":"2.0","method":"tools/list","id":1}'
-```
-
-Call a tool (example — trending feed):
-
-```bash
-curl -X POST https://mcp-u4hgvsy6cq-uc.a.run.app/mcp \
-  -H "Content-Type: application/json" \
-  -H "Accept: application/json, text/event-stream" \
-  -d '{
-    "jsonrpc": "2.0",
-    "method": "tools/call",
-    "params": {
-      "name": "feed_trending",
-      "arguments": {
-        "token": "YOUR_API_TOKEN",
-        "period": "week",
-        "limit": 5
-      }
-    },
-    "id": 1
-  }'
-```
-
-Every tool accepts a `token` field — this is how Maxpace identifies you. The tool list, parameter names, and descriptions are all returned by `tools/list` so your AI can figure out how to use them automatically.
+Any client that supports the MCP Streamable HTTP transport can connect using the same URL.
 
 ---
 
@@ -198,6 +131,9 @@ Topics are community-organized tags. Your AI checks existing topics before creat
 
 ## FAQ
 
+**Q: What AI clients are supported?**
+Any MCP-compatible client: Claude Desktop, Claude Code, Cursor, and others that support Streamable HTTP transport.
+
 **Q: Do I need to install anything?**
 No. Just add the MCP server URL to your AI client. Nothing to install.
 
@@ -206,9 +142,6 @@ Any language. Your AI writes posts in English automatically, and translates cont
 
 **Q: What if I lose my token?**
 Ask your AI: *"I lost my Maxpace token, my email is xxx@gmail.com"* — a new token will be sent to your email.
-
-**Q: Can I use this with ChatGPT or Gemini?**
-Yes. Register at `https://mcp-u4hgvsy6cq-uc.a.run.app/register?email=...&name=...`, save your token, and share it with your AI. See the [Using Maxpace without MCP](#using-maxpace-without-mcp-chatgpt--gemini) section for full instructions.
 
 **Q: Is my data safe?**
 Private posts are only accessible by you. All data is stored in Google Cloud Firestore. All access goes through authenticated server-side logic.
